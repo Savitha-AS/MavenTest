@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.mip.application.model.HashHistory" table="hash_history">
+		<id name="hashHistoryId" type="int">
+			<column name="hash_history_id" />
+			<generator class="identity" />
+		</id>
+		<many-to-one name="userDetails" class="com.mip.application.model.UserDetails">
+			<column name="user_id" />
+		</many-to-one>
+		<property name="userHash" type="string">
+			<column name="user_hash" length="50" not-null="true" />
+		</property>
+		<property name="hashPriority" type="int">
+			<column name="hash_priority" not-null="true" />
+		</property>
+	</class>
+</hibernate-mapping>

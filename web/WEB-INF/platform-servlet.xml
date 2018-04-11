@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/pages/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+	
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<value>nls/messages</value>
+		</property>
+	</bean>
+
+	<bean id="localeResolver" 
+		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<property name="defaultLocale" value="en" />
+	</bean>	
+
+	<bean id="localeChangeInterceptor" 
+		class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+	    <property name="paramName" value="ln" />
+	</bean>
+    
+	<bean id="beanNameUrl" class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping">
+		<property name="interceptors">
+			<ref bean="localeChangeInterceptor"/>
+		</property>
+	</bean>
+	
+	<bean name="/pageRequest/*" class="com.mip.framework.controllers.BaseRequestController"/>
+	
+	<bean name="/login/*" class="com.mip.application.controllers.LoginController">
+		<property name="loginService" ref="loginService" />
+		<property name="userService" ref="userService" />
+		<property name="dbFilter" ref="dbdrivenFilterInvocationDefinitionSource" />
+	</bean>
+	
+	<bean name="/adminConfig/*" class="com.mip.application.controllers.AdminConfigController">
+		<property name="loginService" ref="loginService" />
+		<property name="adminConfigTXService" ref="adminConfigTXService" />
+		<!-- <property name="productsMgmtService" ref="productsMgmtService" /> -->
+	</bean>
+	
+	<bean name="/user/*" class="com.mip.application.controllers.UserController">
+		<property name="userService" ref="userService" />
+		<property name="loginService" ref="loginService" />
+		<property name="branchService" ref="branchService" />
+		<property name="reportManagementService" ref="reportManagementService"/>
+	</bean>
+	
+	<!--  Bean related to UserLeave module -->
+	<bean name="/leave/*" class="com.mip.application.controllers.LeaveManagementController">
+		<property name="userService" ref="userService" />
+		<property name="leaveManagementService" ref="leaveManagementService" />
+	</bean>
+	
+	<!-- Bean related to the Insurance Company -->
+	<bean name="/insuranceCompany/*" class="com.mip.application.controllers.InsuranceProviderController">
+		<property name="insuranceService" ref="insuranceService"></property>
+	</bean>
+	
+	<!-- Implementation for customer module -->
+	<bean name="/customer/*" class="com.mip.application.controllers.CustomerManagementController">
+		<property name="customerService" ref="customerService"></property>
+	</bean>
+	<!-- End of customer module -->
+	
+	<!-- Implementation for SMS Management module -->
+	<bean name="/sms/*" class="com.mip.application.controllers.SMSTemplateController">
+		<property name="smsTemplateService" ref="smsTemplateService"></property>
+	</bean>	
+	<!-- End -->
+	
+	<!-- Beans for Offers and business rule module-->
+	<bean name="/offers/*" class="com.mip.application.controllers.OffersManagementController">
+		<property name="productsMgmtService" ref="productsMgmtService" />
+	</bean>
+
+	<bean name="/businessRule/*" class="com.mip.application.controllers.BusinessRuleController">
+		<property name="businessRulService" ref="businessRulService" />
+		<property name="businessRuleTXService" ref="businessRuleTXService" />
+	</bean>
+		
+	<bean name="/customerReport/*" class="com.mip.application.controllers.ReportManagementController">
+		<property name="reportManagementService" ref="reportManagementService" />
+		<property name="productsMgmtService" ref="productsMgmtService" />
+		<property name="userService" ref="userService" />
+	</bean>
+	
+	<bean name="/financialReport/*" class="com.mip.application.controllers.ReportManagementController">
+		<property name="reportManagementService" ref="reportManagementService" />
+	</bean>
+	
+	<bean name="/weeklyReport/*" class="com.mip.application.controllers.ReportManagementController">
+		<property name="productsMgmtService" ref="productsMgmtService" />
+		<property name="reportManagementService" ref="reportManagementService" />
+	</bean>	
+	
+	<bean name="/revenueReport/*" class="com.mip.application.controllers.ReportManagementController">
+		<property name="reportManagementService" ref="reportManagementService" />
+	</bean>
+	
+	<bean name="/reports/*" class="com.mip.application.controllers.ReportManagementController">
+		<property name="reportManagementService" ref="reportManagementService" />
+	</bean>
+	
+	<bean name="/branch/*" class="com.mip.application.controllers.BranchController">
+		<property name="branchService" ref="branchService" />
+	</bean>	
+
+	<!-- Implementation for claims module -->
+	<bean name="/claims/*" class="com.mip.application.controllers.ClaimsManagementController">
+		<property name="claimsManagementService" ref="claimsManagementService"></property>
+		<property name="customerService" ref="customerService"></property>
+	</bean>
+	
+		
+	<!-- Implementation for role module -->
+	<bean name="/role/*" class="com.mip.application.controllers.RoleController">
+		<property name="roleService" ref="roleService" />
+		<property name="userService" ref="userService" />
+		<property name="dbFilter" ref="dbdrivenFilterInvocationDefinitionSource" />
+	</bean>
+</beans>

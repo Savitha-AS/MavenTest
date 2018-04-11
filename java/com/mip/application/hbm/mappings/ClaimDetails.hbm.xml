@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.mip.application.model.ClaimDetails" table="claim_details">
+		<id name="claimId" type="int">
+			<column name="claim_id" />
+			<generator class="identity" />
+		</id>
+		<property name="fname" type="string">
+			<column name="cust_fname" length="100" not-null="true" />
+		</property>
+		<property name="sname" type="string">
+			<column name="cust_sname" length="50" not-null="true" />
+		</property>
+		<property name="msisdn" type="string">
+			<column name="cust_msisdn" length="12" not-null="true" />
+		</property>
+		<property name="dob" type="date">
+			<column name="cust_dob" length="10" />
+		</property>
+		<property name="age" type="int">
+			<column name="cust_age" not-null="true" />
+		</property>
+		<property name="gender" type="string">
+			<column name="cust_gender" length="6" />
+		</property>
+		<property name="relation" type="string">
+			<column name="cust_relationship" length="20" not-null="true" />
+		</property>
+		<property name="insRelFname" type="string">
+			<column name="ins_fname" length="100" not-null="true" />
+		</property>
+		<property name="insRelSurname" type="string">
+			<column name="ins_sname" length="50" not-null="true" />
+		</property>
+		<property name="insRelIrDoB" type="date">
+			<column name="ins_dob" length="10" />
+		</property>
+		<property name="insRelAge" type="int">
+			<column name="ins_age" not-null="true" />
+		</property>
+		<property name="claimedPerson" type="string">
+			<column name="claimed_person" length="2" not-null="true" />
+		</property>
+		<property name="registeredDate" type="timestamp">
+			<column name="reg_date" not-null="true" />
+		</property>
+		<many-to-one name="claimedBy" class="com.mip.application.model.UserDetails" lazy="false">
+			<column name="claimed_by" not-null="true" />
+		</many-to-one>
+		<property name="claimedDate" type="timestamp">
+			<column name="claimed_date" length="19" not-null="true" />
+		</property>
+	</class>
+</hibernate-mapping>

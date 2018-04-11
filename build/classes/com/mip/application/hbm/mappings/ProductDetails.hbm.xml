@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.mip.application.model.ProductDetails" table="product_details">
+		<id name="productId" type="int">
+			<column name="product_id" />
+			<generator class="identity" />
+		</id>
+		<property name="productName" type="string">
+			<column name="product_name" length="50" not-null="true" />
+		</property>
+		<property name="productDescription" type="string">
+			<column name="product_description" length="200" not-null="true" />
+		</property>	
+		<property name="productCode" type="string">
+			<column name="product_code" length="200" />
+		</property>	
+		<property name="productCreatedDate" type="date">
+			<column name="product_created_date" length="10" not-null="true" />
+		</property>
+		<many-to-one name="productCreatedBy" class="com.mip.application.model.UserDetails" lazy="false">
+			<column name="product_created_by" not-null="true" />
+		</many-to-one>
+		<property name="perDayDeduction" type="java.lang.Float" >
+			<column name="per_day_deduction" />
+		</property>
+		<property name="active" type="byte" >
+			<column name="is_active" />
+		</property>
+		
+		<set name="productCoverDetails" inverse="true" cascade="all">
+		  <key column="product_id" />
+		  <one-to-many class="com.mip.application.model.ProductCoverDetails" />
+		</set>
+		
+		</class>
+</hibernate-mapping>

@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.mip.application.model.CoverHistory" table="cover_history">
+		<id name="coverHistoryId" type="int">
+			<column name="coverHistory_id" />
+			<generator class="identity" />
+		</id>
+		<property name="custId" type="int">
+			<column name="cust_id"  />
+		</property>
+		<property name="msisdn" type="string">
+			<column name="msisdn" />
+		</property>
+		<property name="prevMonthUsage" type="java.math.BigDecimal">
+			<column name="prev_month_usage" />
+		</property>
+		<property name="coverFree" type="java.math.BigDecimal">
+			<column name="cover_free" />
+		</property>
+		<property name="chargesXL" type="java.math.BigDecimal">
+			<column name="charges_xl"  />
+		</property>
+		
+		<property name="coverXL" type="java.math.BigDecimal">
+			<column name="cover_xl"  />
+		</property>
+		
+		<property name="chargesHP" type="java.math.BigDecimal">
+			<column name="charges_hp"  />
+		</property>
+		
+		<property name="coverHP" type="java.math.BigDecimal">
+			<column name="cover_hp"  />
+		</property>
+		
+		<property name="chargesIP" type="java.math.BigDecimal">
+			<column name="charges_ip"  />
+		</property>
+		
+		<property name="coverIP" type="java.math.BigDecimal">
+			<column name="cover_ip"  />
+		</property>
+		
+		
+		
+		
+		<property name="month" type="string">
+			<column name="month"  />
+		</property>
+		<property name="year" type="int">
+			<column name="year"  />
+		</property>
+		<property name="createdDate" type="timestamp">
+			<column name="created_date"  />
+		</property>
+	</class>
+</hibernate-mapping>

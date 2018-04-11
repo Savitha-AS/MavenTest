@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+	default-lazy-init="true">
+		
+	<bean id="loginService" class="com.mip.application.services.LoginService">
+		<property name="userManager" ref="userManager" />
+		<property name="menuManager" ref="menuManager" />
+		<property name="userHashManager" ref="userHashManager" />
+		<property name="hashHistoryManager" ref="hashHistoryManager" />
+		<property name="adminConfigManager" ref="adminConfigManager" />
+		<property name="userTXService" ref="userTXService" />
+	<!-- 	<property name="loginServiceProxy" ref="loginServiceProxy" /> -->
+	</bean>
+
+	<bean id="userService" class="com.mip.application.services.UserService">
+		<property name="userManager" ref="userManager" />
+		<property name="roleManager" ref="roleManager" />
+		<property name="userTXService" ref="userTXService" />
+		<property name="loginService" ref="loginService" />
+		<property name="leaveManagementManager" ref="leaveManagementManager"></property>
+	</bean>
+
+	<bean id="insuranceService" class="com.mip.application.services.InsuranceProviderService">
+		<property name="insuranceManager" ref="insuranceManager" />
+	</bean>
+
+	<!-- Service Implementation for customer module -->
+	<bean id="customerService" class="com.mip.application.services.CustomerService">
+		<property name="customerManager" ref="customerManager"/>
+		<property name="customerWSManager" ref="customerWSManager"/>
+		<property name="loginService" ref="loginService" />
+		<property name="customerTXService" ref="customerTXService" />
+		<property name="offerDetailsManager" ref="offerDetailsMgr"/>
+		<property name="adminConfigManager" ref="adminConfigManager"/>
+		<property name="customerSubsManager" ref="customerSubsManager"></property>
+		<property name="coverHistoryArchiveManager" ref="coverHistoryArchiveManager"></property>
+	</bean>
+
+	<!-- End of customer module -->
+
+	
+	<!-- Service Implementation for SMS Management module -->
+	<bean id="smsTemplateService" class="com.mip.application.services.SMSTemplateService">
+		<property name="smsTemplateManager" ref="smsTemplateManager"/>
+		<property name="castorService" ref="castorService"/>
+	</bean>		
+	<!-- End of customer module -->
+	
+	<!-- Beans for Offers and BusinessRule Module-->
+	<bean id="productsMgmtService" class="com.mip.application.services.ProductsManagementService">
+		<property name="offerDetailsMgr" ref="offerDetailsMgr" />
+		<property name="customerSubsManager" ref="customerSubsManager" />
+		<property name="customerdetailsManager" ref="customerManager" />
+<!-- 		<property name="offerTypeManager" ref="offerTypeManager" /> -->
+		<property name="busRuleMasterManager" ref="busRuleMasterManager" />
+		<property name="offCoverDetailsManager" ref="offCoverDetailsManager" />
+	</bean>
+
+	<bean id="businessRulService" class="com.mip.application.services.BusinessRuleService">
+		<property name="insuranceProviderManger" ref="insuranceManager" />
+		<property name="busRuleMasterManager" ref="busRuleMasterManager" />
+		<property name="offerDetailsMgr" ref="offerDetailsMgr" />
+		<property name="offCoverDetailsManager" ref="offCoverDetailsManager" />
+	</bean>
+	
+		
+	<bean id="reportManagementService" class="com.mip.application.services.ReportManagementService">
+		<property name="userManager" ref="userManager" />
+		<property name="reportManager" ref="reportManager" />
+		<property name="offerDetailsMgr" ref="offerDetailsMgr"></property>
+		<property name="branchManager" ref="branchManager" />
+		<property name="busRuleMasterManager" ref="busRuleMasterManager" />
+	</bean>	
+	
+	
+	<bean id="branchService" class="com.mip.application.services.BranchService">
+		<property name="branchManager" ref="branchManager" />
+		<property name="userManager" ref="userManager" />
+	</bean>	
+	
+	<bean id="leaveManagementService" class="com.mip.application.services.LeaveManagementService">
+	<property name="leaveManagementManager" ref="leaveManagementManager" />
+	</bean>	
+	
+	<bean id="claimsManagementService" class="com.mip.application.services.ClaimsManagementService">
+		<property name="customerManager" ref="customerManager"></property>
+		<property name="claimsManagementManager" ref="claimsManagementManager"></property>
+		<property name="claimTXService" ref="claimTXService"></property>
+		<property name="customerSubsManager" ref="customerSubsManager"></property>
+	</bean>	
+	
+	<bean id="roleService" class="com.mip.application.services.RoleService">
+		<property name="roleManager" ref="roleManager" />
+	</bean>
+	
+	<bean id="castorService" class="com.mip.framework.castor.CastorService">
+	</bean>	
+	
+</beans>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dwr PUBLIC
+    "-//GetAhead Limited//DTD Direct Web Remoting 2.0//EN"
+    "http://directwebremoting.org/schema/dwr20.dtd">
+<dwr>
+	<allow>
+		<create creator="spring" javascript="validateMSISDN">
+			<param name="class"
+				value="com.mip.application.services.UserService" />
+			<param name="beanName" value="userService" />
+			<param name="method" value="checkMSISDN" />
+		</create>
+		<create creator="spring" javascript="validateCustomerMSISDN">
+			<param name="class"
+				value="com.mip.application.services.CustomerService" />
+			<param name="beanName" value="customerService" />
+			<param name="method" value="checkIfMSISDNExists" />
+			<param name="method" value="checkMSISDNStatus" />
+			<param name="method" value="checkMSISDNExist" />
+						
+		</create>
+		<create creator="spring" javascript="validateInsCompName">
+			<param name="class"
+				value="com.mip.application.services.InsuranceProviderService" />
+			<param name="beanName" value="insuranceService" />
+			<param name="method" value="checkIfInsCompExists" />
+		</create>
+		<create creator="spring" javascript="validatePassword">
+			<param name="class"
+				value="com.mip.application.services.LoginService" />
+			<param name="beanName" value="loginService" />
+			<param name="method" value="checkPassword" />
+		</create>
+		<create creator="spring" javascript="validateSelectedBR">
+			<param name="class"
+				value="com.mip.application.services.BusinessRuleService" />
+			<param name="beanName" value="businessRulService" />
+			<param name="method" value="isSelectedBRActive" />
+		</create>
+		<create creator="spring" javascript="validateBranchName">
+			<param name="class"
+				value="com.mip.application.services.BranchService" />
+			<param name="beanName" value="branchService" />
+			<param name="method" value="checkBranchName" />
+		</create>
+		<create creator="spring" javascript="validateBranchBeforeDelete">
+			<param name="class"
+				value="com.mip.application.services.BranchService" />
+			<param name="beanName" value="branchService" />
+			<param name="method" value="checkBeforeBranchDelete" />
+		</create>
+		<create creator="spring" javascript="validateSessionTimeout">
+			<param name="class"
+				value="com.mip.application.services.LoginService" />
+			<param name="beanName" value="loginService" />
+			<param name="method" value="processSession" />
+		</create>
+		<create creator="spring" javascript="validateOfferMSISDN">
+			<param name="class"
+				value="com.mip.application.services.ProductsManagementService" />
+			<param name="beanName" value="productsMgmtService" />
+			<param name="method" value="checkIfValidMSISDN" />
+		</create>
+		<create creator="spring" javascript="validateLeaveDates">
+			<param name="class"
+				value="com.mip.application.services.LeaveManagementService" />
+			<param name="beanName" value="leaveManagementService" />
+			<param name="method" value="checkForValidLeaveDates" />
+		</create>
+		<create creator="spring" javascript="statsService">
+			<param name="class"
+				value="com.mip.application.services.LoginService" />
+			<param name="beanName" value="loginService" />
+			<param name="method" value="getCustomerStatsForUser" />
+		</create>
+				<create creator="spring" javascript="validateAddRole">
+			<param name="class"
+				value="com.mip.application.services.RoleService" />
+			<param name="beanName" value="roleService" />
+			<param name="method" value="checkIfRoleExists"/>
+		</create>
+		<create creator="spring" javascript="validateModifyRole">
+			<param name="class"
+				value="com.mip.application.services.RoleService" />
+			<param name="beanName" value="roleService" />
+			<param name="method" value="checkIfRoleExists"/>
+		</create>
+		<create creator="spring" javascript="displayChildMenus">
+			<param name="class"
+				value="com.mip.application.services.RoleService" />
+			<param name="beanName" value="roleService" />
+			<param name="method" value="getChildMenusForParentMenuId"/>
+		</create>
+		<create creator="spring" javascript="displayMenuService">
+			<param name="class"
+				value="com.mip.application.services.RoleService" />
+			<param name="beanName" value="roleService" />
+			<param name="method" value="getMenuDetailsForRole"/>
+		</create>
+		<convert match="com.mip.application.view.CustomerStatsVO" converter="bean" javascript="customerStats">
+		</convert>
+		<convert match="com.mip.application.view.RoleVO" converter="bean" javascript="childRoleVO">
+			<param name="include" value="childMenuString"></param>
+		</convert>
+	</allow>
+</dwr>

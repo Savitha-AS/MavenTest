@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.mip.application.model.UserDetails" table="user_details">
+		<id name="userId" type="int">
+			<column name="user_id" />
+			<generator class="identity" />
+		</id>
+		<property name="userUid" type="string">
+			<column name="user_uid" length="10" not-null="true" />
+		</property>
+		<property name="fname" type="string">
+			<column name="fname" length="100" not-null="true" />
+		</property>
+		<property name="sname" type="string">
+			<column name="sname" length="50" not-null="true" />
+		</property>
+		<property name="age" type="int">
+			<column name="age" not-null="true" />
+		</property>
+		<property name="dob" type="java.sql.Date">
+			<column name="dob" length="10" />
+		</property>
+		<property name="gender" type="string">
+			<column name="gender" length="6" not-null="true" />
+		</property>
+		<property name="msisdn" type="string">
+			<column name="msisdn" length="12" not-null="true" />
+		</property>
+		<many-to-one name="roleMaster" class="com.mip.application.model.RoleMaster" lazy="false">
+			<column name="role_id" />
+		</many-to-one>
+		<property name="emailId" type="string">
+			<column name="email_id" length="30"/>
+		</property>
+		<property name="createdBy" type="int">
+			<column name="created_by" not-null="true" />
+		</property>
+		<property name="createdDate" type="timestamp">
+			<column name="created_date" length="19" not-null="true" />
+		</property>
+		<property name="modifiedBy" type="int">
+			<column name="modified_by" not-null="true" />
+		</property>
+		<property name="modifiedDate" type="timestamp">
+			<column name="modified_date" length="19" not-null="true" />
+		</property>
+		<property name="active" type="byte">
+			<column name="is_active" not-null="true" />
+		</property>
+		<property name="lastLoggedInDate" type="timestamp">
+			<column name="last_logged_in_date" length="19"/>
+		</property>
+		<many-to-one name="branchDetails" class="com.mip.application.model.BranchDetails" lazy="false">
+			<column name="branch_id" />
+		</many-to-one>
+	</class>
+</hibernate-mapping>

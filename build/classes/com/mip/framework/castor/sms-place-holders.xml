@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sms-place-holders>
+<sms-place-holders>
+	<placeHolder display-order="1">
+		<holder>
+			<code>FIC</code>
+			<name>Free Insurance Cover</name>
+			<value>200</value>
+		</holder>
+	</placeHolder>
+	<placeHolder display-order="2">
+		<holder>
+			<code>PIC</code>
+			<name>Paid Insurance Cover</name>
+			<value>400</value>
+		</holder>
+	</placeHolder>
+	<placeHolder display-order="3">
+		<holder>
+			<code>UA</code>
+			<name>Usage Amount</name>
+			<value>2.5</value>
+		</holder>
+	</placeHolder>
+	<placeHolder display-order="4">
+		<holder>
+			<code>PIA</code>
+			<name>Paid Insurance Amount</name>
+			<value>4</value>
+		</holder>
+	</placeHolder>
+	<placeHolder display-order="5">
+		<holder>
+			<code>TIC</code>
+			<name>Total Insurance Cover</name>
+			<value>600</value>
+		</holder>
+	</placeHolder>
+	<placeHolder display-order="6">
+		<holder>
+			<code>TC</code>
+			<name>Today's Charge</name>
+			<value>45</value>
+		</holder>
+	</placeHolder>
+	<placeHolder display-order="7">
+		<holder>
+			<code>PDD</code>
+			<name>Per Day Deduction</name>
+			<value>5</value>
+		</holder>
+	</placeHolder>
+	<placeHolder display-order="8">
+		<holder>
+			<code>NXTMON</code>
+			<name>Next Month Name</name>
+			<value>December</value>
+		</holder>
+	</placeHolder>
+	<placeHolder display-order="9">
+		<holder>
+			<code>OC</code>
+			<name>Offer Cover Charges</name>
+			<value>1</value>
+		</holder>
+	</placeHolder>
+</sms-place-holders>

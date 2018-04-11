@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.mip.application.model.RoleMaster" table="role_master">
+		<id name="roleId" type="int">
+			<column name="role_id" />
+			<generator class="increment" />
+		</id>
+		<property name="roleName" type="string">
+			<column name="role_name" length="500" not-null="true" />
+		</property>
+		<property name="roleDescription" type="string">
+			<column name="role_description" length="1000" not-null="true" />
+		</property>
+		<property name="isIPReg" type="int">
+			<column name="is_ip_reg"  />
+		</property>
+		
+	</class>
+</hibernate-mapping>

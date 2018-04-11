@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE admin-config>
+<admin-config>
+	<defaultPwd>tigo123</defaultPwd>
+	<userLoginPrefix>TA</userLoginPrefix>
+	<pwdHistoryLimit>3</pwdHistoryLimit>
+	<maxLoginAttempts>5</maxLoginAttempts>
+	<registerCustomerWSURL>http://172.20.3.55:8280/services/CustomerRegistrationBP</registerCustomerWSURL>
+</admin-config>

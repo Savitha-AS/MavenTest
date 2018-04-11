@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.mip.application.model.UserLeaveDetails" table="user_leave_details">
+		<id name="leaveId" type="int">
+			<column name="leave_id" />
+			<generator class="identity" />
+		</id>
+		<many-to-one name="user" class="com.mip.application.model.UserDetails"
+			lazy="false">
+			<column name="user_id" not-null="true" />
+		</many-to-one>
+		<property name="leaveDate" type="timestamp">
+			<column name="leave_date" length="19" not-null="true" />
+		</property>
+		<property name="reason" type="string">
+			<column name="leave_reason" length="50" not-null="true" />
+		</property>
+		<many-to-one name="createdBy" class="com.mip.application.model.UserDetails"
+			lazy="false">
+			<column name="created_by" not-null="true" />
+		</many-to-one>
+		<property name="createdDate" type="timestamp">
+			<column name="created_date" length="19" not-null="true" />
+		</property>
+
+	</class>
+</hibernate-mapping>

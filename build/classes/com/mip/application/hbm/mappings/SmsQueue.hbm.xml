@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.mip.application.model.SmsQueue" table="sms_in_queue">
+		<id name="smsQueueId" type="int">
+			<column name="sms_queue_id" />
+			<generator class="identity" />
+		</id>
+		<property name="smsText" type="string">
+			<column name="sms_text" length="1000" not-null="true" />
+		</property>
+		<property name="smsMsisdn" type="int">
+			<column name="sms_msisdn" not-null="true" />
+		</property>
+		<property name="smsValidity" type="int">
+			<column name="sms_validity" not-null="true" />
+		</property>
+		<property name="createdDate" type="timestamp">
+			<column name="created_date" length="19" />
+		</property>
+	</class>
+</hibernate-mapping>

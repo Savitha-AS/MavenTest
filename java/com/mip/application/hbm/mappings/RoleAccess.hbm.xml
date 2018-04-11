@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.mip.application.model.RoleAccess" table="role_access">
+        <id name="roleAccessId" type="int">
+            <column name="role_access_id" />
+            <generator class="identity" />
+        </id>
+        <property name="parentRoleAccessId" type="int">
+            <column name="parent_role_access_id"/>
+        </property>
+        <property name="roleUrl" type="string">
+            <column name="role_url" length="100"/>
+        </property>
+        <property name="roleAllowed" type="string">
+            <column name="role_allowed" length="100"/>
+        </property>
+    </class>
+</hibernate-mapping>

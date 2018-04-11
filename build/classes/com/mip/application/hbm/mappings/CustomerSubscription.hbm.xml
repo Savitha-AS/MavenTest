@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.mip.application.model.CustomerSubscription"
+		table="customer_subscription">
+		<id name="snId" type="int">
+			<column name="sn_id" />
+			<generator class="identity" />
+		</id>
+		<many-to-one name="customerDetails" class="com.mip.application.model.CustomerDetails" lazy="false">
+			<column name="cust_id" />
+		</many-to-one>
+		<many-to-one name="productDetails" class="com.mip.application.model.ProductDetails" lazy="false">
+			<column name="product_id" />
+		</many-to-one>
+		<property name="earnedCover" type="java.math.BigDecimal">
+			<column name="earned_cover" precision="8" scale="2" />
+		</property>
+		<property name="coverCharges" type="java.math.BigDecimal">
+			<column name="cover_charges" precision="4" scale="2" />
+		</property>
+		<property name="prevMonthUsage" type="java.math.BigDecimal">
+			<column name="prev_month_usage" precision="12" scale="2" />
+		</property>
+		<many-to-one name="regBy" class="com.mip.application.model.UserDetails" lazy="false">
+			<column name="reg_by" not-null="true" />
+		</many-to-one>
+		<many-to-one name="regCommChannel" class="com.mip.application.model.CommunicationChannel">
+			<column name="reg_chn_id" />
+		</many-to-one>
+		<property name="regDate" type="timestamp">
+			<column name="reg_date" length="19" not-null="true" />
+		</property>
+		<property name="confirmed" type="byte">
+			<column name="is_confirmed" not-null="true" />
+		</property>
+		<many-to-one name="confCommChannel" class="com.mip.application.model.CommunicationChannel">
+			<column name="conf_chn_id" />
+		</many-to-one>
+		<property name="confDate" type="timestamp">
+			<column name="conf_date" length="19" not-null="true" />
+		</property>
+		<property name="isDeactivated" type="byte">
+			<column name="is_deactivated"/>
+		</property>
+	</class>
+</hibernate-mapping>

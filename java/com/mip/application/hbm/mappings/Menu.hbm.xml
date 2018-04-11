@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.mip.application.model.Menu" table="menu">
+		<id name="menuId" type="long">
+			<column name="menu_id" />
+			<generator class="assigned" />
+		</id>
+		<property name="menuParentId" type="long">
+			<column name="menu_parent_id" not-null="true" />
+		</property>
+		<property name="menuName" type="string">
+			<column name="menu_name" length="100" not-null="true" />
+		</property>
+		<property name="menuDescription" type="string">
+			<column name="menu_description" length="500" />
+		</property>
+		<property name="menuUrl" type="string">
+			<column name="menu_url" length="500" not-null="true" />
+		</property>
+		<property name="menuTooltip" type="string">
+			<column name="menu_tooltip" length="50" />
+		</property>
+		<property name="menuDisplayOrder" type="int">
+			<column name="menu_display_order" />
+		</property>
+		<property name="active" type="byte">
+			<column name="is_active" not-null="true" />
+		</property>
+	</class>
+</hibernate-mapping>

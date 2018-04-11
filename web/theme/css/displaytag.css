@@ -1,0 +1,48 @@
+span.pagebanner {
+	display: block;
+	margin: 10px 0 10px 0;
+	padding: 2px 4px 2px 10px;
+	text-align: left;
+}
+
+span.pagelinks {
+	display: block;
+	margin-bottom: 5px;
+	margin-top: -33px;
+	margin-right: 5px;
+	padding: 5px 0px;
+	text-align: right;
+	width: 545px;
+	float: right;
+	border: solid 0px #FF0000;
+}
+
+.TD_STYLE {
+	text-align: left;
+	padding: 5px 7px;
+	border-right: 1px solid #ccc !important;
+	white-space:nowrap;
+}
+
+.TD_STYLE_ONE {
+	border-bottom: 0.5px solid #ccc;
+	border-right: 0.5px solid #ccc;
+	text-align:left; width :40px; 
+	text-overflow: ellipsis; 
+	overflow: hidden; 
+	white-space: nowrap;
+	padding:5px
+}
+
+
+.TD_RIGHT_STYLE {
+	text-align: right;
+}
+
+.TR_EVEN {
+	background-color: #f0f0f0;
+}
+
+.TR_ODD {
+	background-color: #FFF;
+}

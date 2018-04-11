@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.mip.application.model.InsuredRelativeDetails"
+		table="insured_relative_details">
+		<id name="insId" type="int">
+			<column name="ins_id" />
+			<generator class="identity" />
+		</id>
+		<property name="fname" type="string">
+			<column name="fname" length="100" not-null="true" />
+		</property>
+		<property name="sname" type="string">
+			<column name="sname" length="50" not-null="true" />
+		</property>
+		<property name="age" type="int">
+			<column name="age" not-null="true" />
+		</property>
+		<property name="dob" type="date">
+			<column name="dob" length="10" />
+		</property>
+		<property name="insMsisdn" type="string">
+			<column name="ins_msisdn"  />
+		</property>
+		
+		<!-- 
+		<many-to-one name="customerDetails"
+			class="com.mip.application.model.CustomerDetails" insert="false"
+			update="false">
+			<column name="cust_id" />
+		</many-to-one>
+		 -->
+		<property name="custRelationship" type="string">
+			<column name="cust_relationship" length="20"  />
+		</property>
+		<property name="offerId" type="int">
+			<column name="offer_id" not-null="true" />
+		</property>
+	</class>
+</hibernate-mapping>

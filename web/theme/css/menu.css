@@ -1,0 +1,37 @@
+ul.menu, ul.menu ul {
+  list-style-type:none;
+  margin: 0;
+  padding: 0;
+  width: 14em;
+}
+
+ul.menu a {
+  display: block;
+  text-decoration: none;	
+}
+
+ul.menu li {
+  margin-top: 1px;
+}
+
+ul.menu li a {
+  background: #3780CE;
+  color: white;
+  padding: 0.5em;
+}
+
+ul.menu li a:hover {
+  background: #3780CE;
+}
+
+ul.menu li ul li a {
+  background: #88B4E2;
+  color: white;
+  padding-left: 20px;
+}
+
+ul.menu li ul li a:hover {
+  background: #5C81A8;
+  border-left: 5px #DAE8F6 solid;
+  padding-left: 15px;
+}

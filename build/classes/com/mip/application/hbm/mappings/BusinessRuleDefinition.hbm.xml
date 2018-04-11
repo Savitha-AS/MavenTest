@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.mip.application.model.BusinessRuleDefinition"
+		table="business_rule_definition">
+		<id name="brDefId" type="int">
+			<column name="br_def_id" />
+			<generator class="identity" />
+		</id>
+		<many-to-one name="businessRuleMaster" class="com.mip.application.model.BusinessRuleMaster">
+			<column name="br_id" />
+		</many-to-one>
+		<property name="brRangeNum" type="int">
+			<column name="br_range_num" not-null="true" />
+		</property>
+		<property name="brRangeFrom" type="float">
+			<column name="br_range_from" precision="12" scale="0"
+				not-null="true" />
+		</property>
+		<property name="brRangeTo" type="float">
+			<column name="br_range_to" precision="12" scale="0" not-null="true" />
+		</property>
+		<property name="brRangeVal" type="float">
+			<column name="br_range_val" precision="12" scale="0" not-null="true" />
+		</property>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.mip.application.model.MenuRoleMapping" table="menu_role_mapping">
+		<id name="roleMenuId" type="int">
+			<column name="role_menu_id" />
+			<generator class="assigned" />
+		</id>
+		<many-to-one name="roleMaster" class="com.mip.application.model.RoleMaster">
+			<column name="role_id" />
+		</many-to-one>
+		<many-to-one name="menu" class="com.mip.application.model.Menu" lazy="false">
+			<column name="menu_id" />
+		</many-to-one>
+	</class>
+</hibernate-mapping>

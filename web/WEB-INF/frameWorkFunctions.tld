@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web jsptaglibrary_2_0.xsd"
+	version="2.0">
+
+  	<description>Functions library pertaining to the framework.</description>
+	<display-name>Custom Framework Functions</display-name>
+	<tlib-version>1.1</tlib-version>
+	<short-name>frameWork</short-name>
+	<uri>/WEB-INF/frameWorkFunctions.tld</uri>
+
+	<function>
+		<description>
+			Tests if an input object is NULL.
+    	</description>
+		<name>isNull</name>
+		<function-class>com.mip.framework.utils.TypeUtil</function-class>
+		<function-signature>
+			boolean isNull(java.lang.Object)
+		</function-signature>
+		<example>
+			&lt;c:if test="${frameWork:isNull(data)}">
+    	</example>
+	</function>
+	
+	<function>
+		<description>
+			Tests if an input object is not NULL.
+    	</description>
+		<name>isNotNull</name>
+		<function-class>com.mip.framework.utils.TypeUtil</function-class>
+		<function-signature>
+			boolean isNotNull(java.lang.Object)
+		</function-signature>
+		<example>
+			&lt;c:if test="${frameWork:isNotNull(data)}">
+    	</example>
+	</function>
+	
+	<function>
+		<description>
+			Concatinate the input strings. 
+    	</description>
+		<name>concat</name>
+		<function-class>com.mip.framework.utils.TypeUtil</function-class>
+		<function-signature>
+			String concat(java.lang.Object, java.lang.Object)
+		</function-signature>
+		<example>
+			&lt;c:out value="${frameWork:concat(str1, str2)}">
+    	</example>
+	</function>
+
+</taglib>

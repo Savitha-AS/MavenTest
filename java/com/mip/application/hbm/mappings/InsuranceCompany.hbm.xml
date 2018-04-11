@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.mip.application.model.InsuranceCompany" table="insurance_company">
+		<id name="insCompId" type="int">
+			<column name="ins_comp_id" />
+			<generator class="identity" />
+		</id>
+		<property name="insCompName" type="string">
+			<column name="ins_comp_name" length="100" not-null="true" />
+		</property>
+		<property name="insCompPhone" type="string">
+			<column name="ins_comp_phone" length="12" />
+		</property>
+		<property name="insCompBranchName" type="string">
+			<column name="ins_comp_branch_name" length="50" />
+		</property>
+		<property name="insCompAddrs1" type="string">
+			<column name="ins_comp_addrs_1" length="100" not-null="true" />
+		</property>
+		<property name="insCompAddrs2" type="string">
+			<column name="ins_comp_addrs_2" length="100" />
+		</property>
+		<property name="insCompCity" type="string">
+			<column name="ins_comp_city" length="50" not-null="true" />
+		</property>
+		<property name="insCompState" type="string">
+			<column name="ins_comp_state" length="50" not-null="true" />
+		</property>
+		<property name="insCompCountry" type="string">
+			<column name="ins_comp_country" length="50" not-null="true" />
+		</property>
+		<property name="insCompZip" type="int">
+			<column name="ins_comp_zip" not-null="true" />
+		</property>
+		<property name="insCompPocName" type="string">
+			<column name="ins_comp_poc_name" length="100" not-null="true" />
+		</property>
+		<property name="insCompPocMsisdn" type="string">
+			<column name="ins_comp_poc_msisdn" length="12" not-null="true" />
+		</property>
+		<many-to-one name="createdBy" class="com.mip.application.model.UserDetails" lazy="false">
+			<column name="created_by" not-null="true" />
+		</many-to-one>
+		<!--<property name="createdBy" type="int">
+			<column name="created_by" not-null="true" />
+		</property>-->
+		<property name="createdDate" type="timestamp">
+			<column name="created_date" length="19" not-null="true" />
+		</property>
+		<many-to-one name="modifiedBy" class="com.mip.application.model.UserDetails" lazy="false">
+			<column name="modified_by" not-null="true" />
+		</many-to-one>
+		<!--<property name="modifiedBy" type="int">
+			<column name="modified_by" not-null="true" />
+		</property>-->
+		<property name="modifiedDate" type="timestamp">
+			<column name="modified_date" length="19" not-null="true" />
+		</property>
+	</class>
+</hibernate-mapping>

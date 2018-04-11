@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd"
+	default-lazy-init="true">
+
+
+	<!-- BEGIN - Transaction manager for a single Hibernate SessionFactory -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!--property name="configLocation" value="classpath:hibernate.cfg.xml" 
+			/ -->
+
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<!--<prop key="hibernate.show_sql">true</prop> -->
+				<prop key="hibernate.format_sql">true</prop>
+			</props>
+		</property>
+
+		<property name="mappingResources">
+			<list>
+				<value>com/mip/application/hbm/mappings/BranchDetails.hbm.xml
+				</value>
+				<value>com/mip/application/hbm/mappings/BusinessRuleDefinition.hbm.xml
+				</value>
+				<value>com/mip/application/hbm/mappings/BusinessRuleMaster.hbm.xml
+				</value>
+				<value>com/mip/application/hbm/mappings/CommunicationChannel.hbm.xml
+				</value>
+				<value>com/mip/application/hbm/mappings/CustomerDetails.hbm.xml
+				</value>
+				<value>com/mip/application/hbm/mappings/CustomerSubscription.hbm.xml
+				</value>
+				<value>com/mip/application/hbm/mappings/HashHistory.hbm.xml</value>
+				<value>com/mip/application/hbm/mappings/InsuranceCompany.hbm.xml
+				</value>
+				<value>com/mip/application/hbm/mappings/InsuredRelativeDetails.hbm.xml
+				</value>
+				<value>com/mip/application/hbm/mappings/Menu.hbm.xml</value>
+				<value>com/mip/application/hbm/mappings/MenuRoleMapping.hbm.xml
+				</value>
+				<value>com/mip/application/hbm/mappings/ProductCoverDetails.hbm.xml
+				</value>
+				<value>com/mip/application/hbm/mappings/ProductDetails.hbm.xml
+				</value>
+				<value>com/mip/application/hbm/mappings/RoleMaster.hbm.xml</value>
+				<value>com/mip/application/hbm/mappings/SmsQueue.hbm.xml</value>
+				<value>com/mip/application/hbm/mappings/SmsTemplateMaster.hbm.xml
+				</value>
+				<value>com/mip/application/hbm/mappings/UserDetails.hbm.xml</value>
+				<value>com/mip/application/hbm/mappings/UserHash.hbm.xml</value>
+				<value>com/mip/application/hbm/mappings/UserLeaveDetails.hbm.xml
+				</value>
+				<value>com/mip/application/hbm/mappings/ClaimDetails.hbm.xml</value>
+				<value>com/mip/application/hbm/mappings/RoleAccess.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>file:///D:/MIP/DBCredentials/GH/ApplicationConfig.properties
+			</value>
+		</property>
+	</bean>
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName">
+			<value>com.mysql.jdbc.Driver</value>
+		</property>
+		<property name="url">
+			<value>${db.url}</value>
+			<!-- <value>jdbc:mysql://172.25.3.57:3306/mipgh1017</value> -->
+		</property>
+		<property name="username">
+			<value>${db.username}</value>
+		</property>
+		<property name="password">
+			<value>${db.password}</value>
+		</property>
+	</bean>
+	<!-- END - Transaction manager for a single Hibernate SessionFactory -->
+
+
+
+	<!-- BEGIN - Configurations w.r.t all the DAO implementors in the application -->
+	<bean id="menuManager" class="com.mip.application.dal.managers.MenuManager">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="userHashManager" class="com.mip.application.dal.managers.UserHashManager">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="hashHistoryManager" class="com.mip.application.dal.managers.HashHistoryManager">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="userManager" class="com.mip.application.dal.managers.UserManager">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="roleManager" class="com.mip.application.dal.managers.RoleManager">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<!-- END - Configurations w.r.t all the DAO implementors in the application -->
+
+
+	<bean id="insuranceManager"
+		class="com.mip.application.dal.managers.InsuranceProviderManager">
+		<property name="hibernateTemplate">
+			<ref local="hibernateTemplate" />
+		</property>
+	</bean>
+
+	<!-- <bean id="insuranceCpnyMapping" class="com.mip.application.model.mappings.InsuranceCompanyMappings"> 
+		</bean> -->
+
+	<!-- DAO Implementation for customer module -->
+	<bean id="customerManager" class="com.mip.application.dal.managers.CustomerManager">
+		<property name="insuredRelativeDetails" ref="insuredRelativeDetails"></property>
+		<property name="hibernateTemplate">
+			<ref local="hibernateTemplate" />
+		</property>
+		<!-- <property name="adminConfigManager" ref="adminConfigManager" /> -->
+		<property name="jdbcTemplate" ref="jdbcTemplate" />
+	</bean>
+	<!-- WS Invocation for customer module -->
+	<bean id="customerWSManager" class="com.mip.application.WS.managers.CustomerWSManager">
+
+	</bean>
+	<bean id="insuredRelativeDetails" class="com.mip.application.model.InsuredRelativeDetails">
+	</bean>
+
+	<!-- <bean id="customerMapping" class="com.mip.application.model.mappings.CustomerMappings"> 
+		</bean> <bean id="customerV2MMapping" class="com.mip.application.model.mappings.CustomerMappings"> 
+		</bean> -->
+
+	<!-- End of customer module -->
+
+	<!-- DAO Implementation for SMS Management module -->
+	<bean id="smsTemplateManager" class="com.mip.application.dal.managers.SMSTemplateManager">
+		<property name="hibernateTemplate">
+			<ref local="hibernateTemplate" />
+		</property>
+	</bean>
+
+	<bean id="smsTemplateMappings" class="com.mip.application.model.mappings.SMSTemplateMappings">
+	</bean>
+
+	<bean id="smsTemplateM2VMappings"
+		class="com.mip.application.view.mappings.SMSTemplateM2VMappings">
+	</bean>
+	<!-- End of SMS Management module -->
+	<!-- DAO Beans for Offers AND BusinessRule Modules -->
+	<bean id="offerDetailsMgr" class="com.mip.application.dal.managers.OfferDetailsManager">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+
+
+	<bean id="customerSubsManager"
+		class="com.mip.application.dal.managers.CustomerSubscriptionManager">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+
+	<!-- <bean id="offerTypeManager" class="com.mip.application.dal.managers.OfferTypeManager"> 
+		<property name="hibernateTemplate" ref="hibernateTemplate" /> </bean> -->
+
+	<bean id="busRuleDefinitionManager"
+		class="com.mip.application.dal.managers.BusinessRuleDefinitionManager">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+
+	<bean id="busRuleMasterManager"
+		class="com.mip.application.dal.managers.BusinessRuleMasterManager">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+
+	<bean id="offCoverDetailsManager"
+		class="com.mip.application.dal.managers.OfferCoverDetailsManager">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+
+	<bean id="reportManager"
+		class="com.mip.application.dal.managers.ReportManagementManager">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+		<property name="jdbcTemplate" ref="jdbcTemplate" />
+	</bean>
+
+	<bean id="adminConfigManager" class="com.mip.application.dal.managers.AdminConfigManager">
+		<property name="jdbcTemplate" ref="jdbcTemplate" />
+	</bean>
+
+	<bean id="branchManager" class="com.mip.application.dal.managers.BranchManager">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+
+	<bean id="leaveManagementManager" class="com.mip.application.dal.managers.LeaveManagementManager">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+
+	<bean id="claimsManagementManager"
+		class="com.mip.application.dal.managers.ClaimsManagementManager">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	
+
+	<!-- Bean Datasources -->
+		<bean id="dataSourceCH"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName">
+			<value>com.mysql.jdbc.Driver</value>
+		</property>
+		<property name="url">
+			<value>${db.ch.url}</value>
+		</property>
+		<property name="username">
+			<value>${db.username}</value>
+		</property>
+		<property name="password">
+			<value>${db.password}</value>
+		</property>
+	</bean>
+
+	<bean id="jdbcTemplateCH" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSourceCH" />
+	</bean>
+
+	<bean id="hibernateTemplateCH" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactoryCH" ref="sessionFactoryCH" />
+	</bean>
+
+
+	<bean id="sessionFactoryCH"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSourceCH" ref="dataSourceCH" />
+		<!--property name="configLocation" value="classpath:hibernate.cfg.xml" 
+			/ -->
+
+		<property name="hibernateProperties2">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<!--<prop key="hibernate.show_sql">true</prop> -->
+				<prop key="hibernate.format_sql">true</prop>
+			</props>
+		</property>
+
+		<property name="mappingResources2">
+			<list>
+				<value>com/mip/application/hbm/mappings/CoverHistory.hbm.xml</value>
+
+			</list>
+		</property>
+	</bean>
+
+	<bean id="coverHistoryArchiveManager"
+		class="com.mip.application.dal.managers.CoverHistoryArchiveManager">
+		<property name="jdbcTemplateCH" ref="jdbcTemplateCH" />
+	</bean>
+
+
+</beans>

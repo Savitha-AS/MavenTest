@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.mip.application.model.UserHash" table="user_hash">
+		<id name="hashId" type="int">
+			<column name="hash_id" />
+			<generator class="identity" />
+		</id>
+		<many-to-one name="userDetails" class="com.mip.application.model.UserDetails" lazy="false">
+			<column name="user_id" />
+		</many-to-one>
+		<property name="userHash" type="string">
+			<column name="user_hash" length="50" not-null="true" />
+		</property>
+		<property name="accountLocked" type="byte">
+			<column name="is_account_locked" not-null="true" />
+		</property>
+		<property name="attemptCount" type="int">
+			<column name="attempt_count" not-null="true" />
+		</property>
+		<property name="firstLogin" type="byte">
+			<column name="is_first_login" not-null="true" />
+		</property>
+		<property name="loggedIn" type="byte">
+			<column name="is_logged_in" not-null="true" />
+		</property>
+	</class>
+</hibernate-mapping>

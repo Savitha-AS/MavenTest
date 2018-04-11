@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.mip.application.model.SmsTemplateMaster" table="sms_template_master">
+		<id name="smsTemplateId" type="int">
+			<column name="sms_template_id" />
+			<generator class="identity" />
+		</id>
+		<property name="smsTemplateName" type="string">
+			<column name="sms_template_name" length="250" not-null="true" />
+		</property>
+		<property name="smsTemplateDescription" type="string">
+			<column name="sms_template_description" length="500" />
+		</property>
+		<property name="smsTemplate" type="string">
+			<column name="sms_template" length="1000" not-null="true" />
+		</property>
+		<property name="smsPlaceHoldersCount" type="int">
+			<column name="sms_place_holders_count" not-null="true" />
+		</property>
+		<many-to-one name="createdBy" class="com.mip.application.model.UserDetails" lazy="false">
+			<column name="created_by" not-null="true" />
+		</many-to-one>
+		<property name="createdDate" type="timestamp">
+			<column name="created_date" length="19" not-null="true" />
+		</property>
+		<many-to-one name="modifiedBy" class="com.mip.application.model.UserDetails" lazy="false">
+			<column name="modified_by" not-null="true" />
+		</many-to-one>
+		<property name="modifiedDate" type="timestamp">
+			<column name="modified_date" length="19" not-null="true" />
+		</property>
+		<property name="smsValidity" type="int">
+			<column name="sms_validity" not-null="true" />
+		</property>
+	</class>
+</hibernate-mapping>

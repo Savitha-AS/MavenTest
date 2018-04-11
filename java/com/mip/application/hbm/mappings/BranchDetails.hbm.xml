@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.mip.application.model.BranchDetails" table="branch_details">
+        <id name="branchId" type="int">
+            <column name="branch_id" />
+            <generator class="identity" />
+        </id>
+        <property name="branchCode" type="string">
+            <column name="branch_code" length="10" not-null="true" />
+        </property>
+        <property name="branchName" type="string">
+            <column name="branch_name" length="100" not-null="true" />
+        </property>
+        <property name="branchStreet" type="string">
+            <column name="branch_street" length="100" />
+        </property>
+        <property name="branchRegion" type="string">
+            <column name="branch_region" length="100" />
+        </property>
+        <property name="branchCity" type="string">
+            <column name="branch_city" length="100" not-null="true" />
+        </property>
+        <property name="active" type="byte">
+            <column name="is_active" not-null="true" />
+        </property>
+		<many-to-one name="createdBy" class="com.mip.application.model.UserDetails" lazy="false">
+			<column name="created_by" not-null="true" />
+		</many-to-one>
+        <property name="createdDate" type="timestamp">
+            <column name="created_date" length="19" not-null="true" />
+        </property>
+		<many-to-one name="modifiedBy" class="com.mip.application.model.UserDetails" lazy="false">
+			<column name="modified_by" not-null="true" />
+		</many-to-one>	
+        <property name="modifiedDate" type="timestamp">
+            <column name="modified_date" length="19" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

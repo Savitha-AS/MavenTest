@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd" default-lazy-init="true">
+	
+	<bean id="filterChainProxy" class="org.acegisecurity.util.FilterChainProxy">
+		<property name="filterInvocationDefinitionSource">
+			<value>
+                CONVERT_URL_TO_LOWERCASE_BEFORE_COMPARISON
+                PATTERN_TYPE_APACHE_ANT
+                /**/*=concurrentSessionFilter,httpSessionContextIntegrationFilter,authenticationProcessingFilter,securityContextHolderAwareRequestFilter,anonymousProcessingFilter,exceptionTranslationFilter,filterInvocationInterceptor,logoutFilter
+				
+      </value>
+     </property>
+	</bean>
+	
+	<bean id="httpSessionContextIntegrationFilter" class="org.acegisecurity.context.HttpSessionContextIntegrationFilter"/>
+	
+	<bean id="authenticationProcessingFilter" class="org.acegisecurity.ui.webapp.AuthenticationProcessingFilter">
+		<property name="authenticationManager" ref="authenticationManager"/>
+		<property name="authenticationFailureUrl" value="/pages/login.jsp?login_error=1"/>
+		<property name="defaultTargetUrl" value="/"/>
+		<property name="alwaysUseDefaultTargetUrl"><value>true</value></property>
+		<property name="filterProcessesUrl" value="/j_security_check"/>
+	</bean>
+	
+	<bean id="securityContextHolderAwareRequestFilter" class="org.acegisecurity.wrapper.SecurityContextHolderAwareRequestFilter"/>
+
+	<bean id="anonymousProcessingFilter" class="org.acegisecurity.providers.anonymous.AnonymousProcessingFilter">
+		<property name="key" value="anonymous"/>
+		<property name="userAttribute" value="anonymous,ROLE_ANONYMOUS"/>
+	</bean>
+	<bean id="exceptionTranslationFilter" class="org.acegisecurity.ui.ExceptionTranslationFilter">
+		<property name="authenticationEntryPoint">
+			<bean class="org.acegisecurity.ui.webapp.AuthenticationProcessingFilterEntryPoint">
+				<property name="loginFormUrl" value="/pages/login.jsp"/>
+				<property name="forceHttps" value="false"/>
+			</bean>
+		</property>
+		<property name="accessDeniedHandler">
+			<bean class="org.acegisecurity.ui.AccessDeniedHandlerImpl">
+				<property name="errorPage" value="/pages/access_denied.jsp"/>
+	    	</bean>
+		</property>
+	</bean>
+	
+	<bean id="filterInvocationInterceptor" class="org.acegisecurity.intercept.web.FilterSecurityInterceptor">
+		<property name="authenticationManager" ref="authenticationManager"/>
+		<property name="accessDecisionManager" ref="accessDecisionManager"/>
+        <property name="objectDefinitionSource" ref="dbdrivenFilterInvocationDefinitionSource">
+            <!-- <value>
+                PATTERN_TYPE_APACHE_ANT
+                /index.jsp=ROLE_ADMIN,ROLE_USER,ROLE_USER_ADMIN,ROLE_INSURER,ROLE_CALL_CENTER_AGENT,ROLE_REPORTING_EXECUTIVE
+                /pages/login.jsp=ROLE_ANONYMOUS,ROLE_ADMIN,ROLE_USER,ROLE_USER_ADMIN,ROLE_INSURER,ROLE_CALL_CENTER_AGENT,ROLE_REPORTING_EXECUTIVE
+                /pages/forgotPassword.jsp=ROLE_ANONYMOUS,ROLE_ADMIN,ROLE_USER,ROLE_USER_ADMIN,ROLE_INSURER,ROLE_CALL_CENTER_AGENT,ROLE_REPORTING_EXECUTIVE
+                /offers*=ROLE_ADMIN
+                /branch*=ROLE_ADMIN
+                /businessRule*=ROLE_ADMIN
+                /insuranceCompany*=ROLE_ADMIN
+                /customerReport*=ROLE_ADMIN,ROLE_INSURER,ROLE_REPORTING_EXECUTIVE,ROLE_USER_ADMIN
+                /reports*=ROLE_ADMIN,ROLE_REPORTING_EXECUTIVE,ROLE_INSURER
+                /sms*=ROLE_ADMIN
+                /customer*=ROLE_ADMIN,ROLE_USER,ROLE_USER_ADMIN,ROLE_INSURER,ROLE_CALL_CENTER_AGENT
+                /leave*=ROLE_USER_ADMIN,ROLE_ADMIN
+                /user*=ROLE_ADMIN
+                /login*=ROLE_ADMIN,ROLE_USER,ROLE_USER_ADMIN,ROLE_INSURER,ROLE_CALL_CENTER_AGENT,ROLE_REPORTING_EXECUTIVE
+                /adminConfig*=ROLE_ADMIN
+                /pages/businessRule/*=ROLE_ADMIN
+                /pages/offer/*=ROLE_ADMIN
+                /pages/branch/*=ROLE_ADMIN
+                /pages/insuranceCompany/*=ROLE_ADMIN
+                /pages/customer/*=ROLE_ADMIN,ROLE_USER,ROLE_USER_ADMIN,ROLE_INSURER,ROLE_CALL_CENTER_AGENT
+                /pages/reports/*=ROLE_ADMIN,ROLE_REPORTING_EXECUTIVE,ROLE_USER_ADMIN
+                /pages/smsTemplate/*=ROLE_ADMIN
+                /pages/user/*=ROLE_ADMIN
+                /pages/leave/*=ROLE_USER_ADMIN,ROLE_ADMIN
+                /platform.*.home*=ROLE_ADMIN,ROLE_USER,ROLE_USER_ADMIN,ROLE_INSURER,ROLE_CALL_CENTER_AGENT,ROLE_REPORTING_EXECUTIVE
+                /platform.*.changePassword*=ROLE_ADMIN,ROLE_USER,ROLE_USER_ADMIN,ROLE_INSURER,ROLE_CALL_CENTER_AGENT,ROLE_REPORTING_EXECUTIVE
+                /platform.*.adminConfig*=ROLE_ADMIN
+                /claims*=ROLE_ADMIN,ROLE_INSURER
+           </value> -->
+        </property>
+	</bean>
+	
+		
+	<bean id="dbdrivenFilterInvocationDefinitionSource"
+		class="com.mip.application.dal.managers.DatabaseDrivenFilterInvocationDefinitionSource">
+			<property name="userService" ref="userService" />
+	</bean>
+	
+	
+	<bean id="accessDecisionManager" class="org.acegisecurity.vote.AffirmativeBased">
+        <property name="allowIfAllAbstainDecisions" value="false"/>
+        <property name="messageSource" ref="messageSource"></property>
+        <property name="decisionVoters">
+   				<list>
+   					<ref local="roleVoter"/>
+				</list>
+        </property>
+    </bean>
+    
+    <bean id="messageSource" class="org.acegisecurity.AcegiMessageSource">
+		<property name="basename">
+			<value>nls.messages</value>
+		</property>
+	</bean>
+
+<bean id="roleVoter" class="org.acegisecurity.vote.RoleVoter">
+<property name="rolePrefix" value=""/>
+</bean>
+
+	<bean id="authenticationManager" class="org.acegisecurity.providers.ProviderManager">
+		<property name="providers">
+			<list>
+				<ref local="daoAuthenticationProvider"/>
+				</list>
+		</property>
+		<property name="sessionController"  ref="concurrentSessionController"/> 
+	</bean>
+
+<bean id="daoAuthenticationProvider"
+    class="com.mip.framework.security.CustomDAOAuthenticationProvider">
+    <property name="userDetailsService" ref="userDetailsService"></property>
+    <property name="driverManagerDataSource" ref="dataSource"/>
+    <property name="passwordEncoder">
+    <bean  class="com.mip.framework.security.CustomPasswordEncoder" />
+    </property>
+    
+</bean>
+ 
+  <bean id="userDetailsService" class="com.mip.framework.security.CustomMISPJDBCImpl">
+   <property name="dataSource" ref="dataSource"></property>
+   <property name="usersByUsernameQuery">
+     <value>SELECT userDetails.user_uid,userHash.user_hash,userDetails.is_active,userHash.is_account_locked,  
+     		userHash.attempt_count FROM user_details userDetails, user_hash userHash
+     		WHERE userDetails.user_id = userHash.user_id AND userDetails.user_uid = ?</value>
+   </property>
+   <property name="authoritiesByUsernameQuery">
+     <value>SELECT user_uid,role_description 
+     		FROM role_master role, user_details user 
+     		WHERE role.role_id = user.role_id AND user_uid = ?</value>
+   </property>
+  </bean>
+ 
+
+<bean id="loggerListener" class="org.acegisecurity.event.authentication.LoggerListener"/>
+
+
+<bean id="logoutFilter" class="org.acegisecurity.ui.logout.LogoutFilter">
+  <constructor-arg value="/pages/login.jsp" />
+  <constructor-arg>
+   <list>
+      <bean
+        class="org.acegisecurity.ui.logout.SecurityContextLogoutHandler" />
+    </list>
+  </constructor-arg>
+  <property name="filterProcessesUrl" value="/pages/logout.jsp"/>
+</bean>
+
+<bean id="concurrentSessionController"
+	class="org.acegisecurity.concurrent.ConcurrentSessionControllerImpl">
+	<property name="maximumSessions" value="1" />
+	<property name="exceptionIfMaximumExceeded" value="false" />
+	<property name="sessionRegistry">
+		<ref local="sessionRegistry" />
+	</property>
+</bean>
+
+<bean id="concurrentSessionFilter" class="org.acegisecurity.concurrent.ConcurrentSessionFilter">
+	<property name="sessionRegistry">
+		<ref bean="sessionRegistry" />
+	</property>
+	<property name="expiredUrl" value="/pages/login.jsp" />
+</bean>
+
+<!-- used by concurrentSessionFilter and concurrentSessionController -->
+
+<bean id="sessionRegistry" class="org.acegisecurity.concurrent.SessionRegistryImpl" />
+
+</beans>

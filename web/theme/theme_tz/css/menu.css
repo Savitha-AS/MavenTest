@@ -1,0 +1,65 @@
+ul.menu, ul.menu ul {
+  list-style-type:none;
+  margin: 0;
+  padding: 0;
+  width: 14.8em;
+}
+ul.menu a {
+  display: block;
+  text-decoration: none;
+}
+
+ul.menu li {
+  margin-top: 1px;
+}
+ul.menu li a {
+  background: #227DB3;
+  color: white;
+  padding: 0.7em 0.5em;
+}
+
+ul.menu li a:hover {
+  background: #63a9d0;
+}
+
+ul.menu li ul li a {
+  background: #d2ecfb;
+  color: #2373b4;
+  padding-left: 20px;
+}
+
+ul.menu li ul li a:hover{
+  background: #a1c7dd;
+  border-left: 5px #99c0f0 solid;
+  padding-left: 15px;
+  color:#1d648c;
+}
+
+/**
+ * The following style is used to have a sub-menu selected 
+ * after the link of the sub-menu is clicked.
+ * 
+ * The use of !important in this case, is to override the style defined in  
+ * "ul.menu li a".
+ *
+ * However, the following style is same as that of "ul.menu li a:hover".
+ */
+.selectedMenu{
+  background: #63a9d0 !important;
+}
+
+/**
+ * The following style is used to have a sub-menu selected 
+ * after the link of the sub-menu is clicked.
+ * 
+ * The use of !important in this case, is to override the styles defined in  
+ * "ul.menu li ul li a" and "ul.menu li a".
+ *
+ * However, the following style is same as that of "ul.menu li ul li a:hover".
+ */
+.selectedSubMenu{
+  background: #a1c7dd !important;
+  border-left: 5px #99c0f0 solid !important;
+  padding-left: 15px !important;
+  color:#1d648c !important;
+}

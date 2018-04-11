@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.mip.application.model.BusinessRuleMaster"
+		table="business_rule_master">
+		<id name="brId" type="int">
+			<column name="br_id" />
+			<generator class="identity" />
+		</id>
+		<property name="brVersion" type="string">
+			<column name="br_version" length="100" not-null="true" />
+		</property>
+		<property name="premiumAmtPerc" type="float">
+			<column name="ins_premium_percent" not-null="true" />
+		</property>
+		<property name="active" type="byte">
+			<column name="is_active" not-null="true" />
+		</property>
+		<many-to-one name="insuranceCompany" class="com.mip.application.model.InsuranceCompany">
+			<column name="ins_comp_id" />
+		</many-to-one>
+		<property name="createdDate" type="timestamp">
+			<column name="created_date" length="19" not-null="true" />
+		</property>	
+		<many-to-one name="createdBy" class="com.mip.application.model.UserDetails" lazy="false">
+			<column name="created_by" not-null="true" />
+		</many-to-one>
+		
+		<list name="busRuleDef" lazy="false" cascade="all">
+			<key column="br_id" />
+	        <list-index base="1">
+		       <column name="br_range_num" ></column>
+	        </list-index>
+	        <one-to-many class="com.mip.application.model.BusinessRuleDefinition" />
+        </list>
+	</class>
+	
+</hibernate-mapping>

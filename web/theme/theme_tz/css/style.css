@@ -1,0 +1,709 @@
+@import url("menu.css");
+@import url("jquery-ui.css");
+
+/**
+ * Loads custom fonts
+*/
+@font-face {
+	font-family: 'CronosProSemibold';
+	src: url('../../fonts/CronosProSemiBold/cronospro-semibold-webfont.eot');
+	src:
+		url('../../fonts/CronosProSemiBold/cronospro-semibold-webfont.eot?#iefix')
+		format('embedded-opentype'),
+		url('../../fonts/CronosProSemiBold/cronospro-semibold-webfont.woff')
+		format('woff'),
+		url('../../fonts/CronosProSemiBold/cronospro-semibold-webfont.ttf')
+		format('truetype'),
+		url('../../fonts/CronosProSemiBold/cronospro-semibold-webfont.svg#CronosProSemibold')
+		format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Cronos Pro';
+	src: url('../../fonts/CronosProRegular/cronosproregular.eot');
+	src: url('../../fonts/CronosProRegular/cronosproregular.eot?#iefix')
+		format('embedded-opentype'),
+		url('../../fonts/CronosProRegular/cronosproregular.woff')
+		format('woff'),
+		url('../../fonts/CronosProRegular/cronosproregular.ttf')
+		format('truetype'),
+		url('../../fonts/CronosProRegular/cronosproregular.svg#CronosProRegular')
+		format('svg');
+	font-weight: normal;
+	font-style: normal;
+	font-size: 0.9em;
+}
+
+/**
+ * Site wide styles
+ */
+* {
+	margin: 0;
+	padding: 0;
+	/*filter:none !important;*/
+	outline: none;
+}
+
+html {
+	overflow-y:scroll;
+}
+body {
+	background: url(../images/bg.jpg) repeat-x top #b3d4e8;
+	font-family: 'CronosProSemibold';
+	font-size: 0.9em;
+	color: #333;
+	margin: 20px 0;
+}
+
+div {
+	filter: none !important;
+}
+
+select {
+	height: 20px;
+	border: 1px solid #CCCCCC;
+	font-family: 'CronosProSemibold';
+	/*font-family: Calibri;*/
+	font-weight:normal;
+	font-size: 0.9em;
+	color: #333;
+}
+
+select option {
+	margin: 2px 0 2px 1px;
+	/* line-height: 60px;*/
+}
+
+input[type=text],textarea {
+	border: 1px solid #CCCCCC;
+	font-size: 0.9em;
+	color: #333;
+	padding: 0 0 0 2px;
+	margin: 1px 0;
+	font-family: 'CronosProSemibold';
+	float:left;
+}
+
+input[type=password] {
+	border: 1px solid #CCCCCC;
+	font-size: 0.9em;
+	color: #333;
+	padding: 0 0 0 2px;
+	margin: 1px 0;
+}
+
+textarea {
+	resize: none;
+	height:50px;
+}
+
+input[type=radio] {
+	color: #333;
+	margin: 3px 5px 0 3px;
+}
+
+pre {
+	font-family: CronosProSemibold;
+	padding-left: 3px;
+}
+
+input[type=button] {
+	font-family: CronosProSemibold;
+	font-size: 1em;
+	padding-left: 8px;
+	padding-right: 8px;
+}
+
+h3 {
+	font-size: medium;
+	color: #3b86c3;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+fieldset {
+	margin: 0 5px;
+}
+
+legend {
+	margin: 0 5px;
+	padding: 0 4px 4px 4px;
+	color: #333;
+}
+
+/**
+ * Wraps the whole container
+*/
+.wrapper {
+	width: 960px;
+	margin: 0 auto;
+	border: solid 0px #FF0000;
+	background: #FFF;
+	height: auto;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	box-shadow: 0px 0px 10px #5f5f5f;
+	-webkit-box-shadow: 0px 0px 10px #5f5f5f;
+	-ms-filter: progid:DXImageTransform.Microsoft.Shadow(Strength=5,
+		Direction=120, Color='#818181' );
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=5, Direction=120,
+		Color='#818181' );
+	border-radius: 10px;
+}
+
+.header {
+	height: 150px;
+	background: url(../images/bg-header.png) repeat-x top left #446ab3;
+	width: 100%;
+	-webkit-border-top-left-radius: 10px;
+	-webkit-border-top-right-radius: 10px;
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+}
+
+.header .left {
+	width: 400px;
+	height: 70px;
+	float: left;
+	background: url(../images/mip-logo.png) no-repeat 100% 0%;
+	margin: 40px 0 0 20px;
+}
+
+.header .right {
+	background: url("../images/bima-logo.png") no-repeat scroll 100% 0 transparent;
+	border-top-right-radius: 10px;
+	float: right;
+	height: 63px;
+	margin: 55px 20px 0 0;
+	width: 224px;
+}
+
+.header-border {
+	height: 2px;
+	width: 960px;
+	background: #b5d6eb;
+}
+
+.footer {
+	height: 50px;
+	width: 945px;
+	line-height: 37px;
+	color: #798eb1;
+	text-align: right;
+	padding-right: 10px;
+}
+
+/**
+ * wraps the content part including menu
+*/
+.content-wrapper {
+	border: solid 0px #FF0000;
+	padding: 15px;
+	overflow: hidden;
+	width: 930px;
+	margin: 0px 0 0px 0;
+	background: #FFF;
+}
+
+.menu-wrapper {
+	width: 210px;
+	min-height: 300px;
+	float: left;
+	/*background:#446ab3;*/
+}
+
+/**
+ * Container for the content box
+*/
+.content-container {
+	width: 700px;
+	min-height: 444px;
+	float: right;
+	border: solid 1px #d3d3d3;
+	background: #FFF;
+}
+
+.clear {
+	clear: both;
+	height: 0;
+	overflow: hidden;
+}
+
+#box {
+	background: none repeat scroll 0 0 #ffffff;
+	border: 0px solid #b1b1b2;
+	display: block;
+	padding: 0px;
+}
+
+#exportToExcelBtn {
+	cursor: hand;
+	margin-left: 10px;
+	border: 0px none #ffffff;
+}
+
+/**
+ * page title
+*/
+.pagetitle {
+	background: url("../images/bg-header.png") repeat-x scroll center bottom
+		#FFFFFF;
+	border-bottom: 1px solid #B5D6EB;
+	height: 42px;
+	line-height: 42px;
+	margin: 0 0 10px;
+	text-indent: 15px;
+}
+
+/**
+ * Style the data in the table
+*/
+.data_label {
+	width: 170px;
+	float: left;
+	text-align: left;
+}
+
+.data_container_color1 {
+	height: 25px;
+	padding-left: 10px;
+	padding-top: 5px;
+	background-color: #cbe8f8;
+	margin: 0 5px;
+}
+
+.data_container_color2 {
+	height: 25px;
+	padding-top: 5px;
+	padding-left: 10px;
+	background-color: #f0faff;
+	margin: 0 5px;
+}
+
+.data_text {
+	width: 368px;
+	float: left;
+	vertical-align: center;
+}
+
+.table_header {
+	background-color: #CBE8F8;
+}
+
+/**
+ * Add row styles
+*/
+.mini_table_color1 {
+	font-family: Calibri;
+	height: 25px;
+	padding: 5px 0 0 180px;
+	background-color: #CBE8F8;
+	margin: 0 5px;
+}
+
+.mini_table_color2 {
+	font-family: Calibri;
+	height: 25px;
+	padding: 5px 0 0 180px;
+	background-color: #F0FAFF;
+	margin: 0 5px;
+}
+
+.mini_table_th {
+	font-family: 'CronosProSemibold';
+}
+
+.mini_table_td {
+	float: left;
+	width: 110px;
+	white-space: nowrap;
+}
+
+.mini_table_td img {
+	margin: -4px 0 0 0;
+	/*padding: 0 0 0 10px;*/
+}
+
+.labelTxtBox_color1 {
+	font-family: CronosProSemibold;
+	background-color: #CBE8F8;
+	text-align: right;
+}
+
+.labelTxtBox_color2 {
+	font-family: CronosProSemibold;
+	background-color: #F0FAFF;
+	text-align: right;
+}
+
+.labelTxtBoxLeft_color1 {
+	font-family: CronosProSemibold;
+	background-color: #CBE8F8;
+	text-align: left;
+}
+
+.labelTxtBoxLeft_color2 {
+	font-family: CronosProSemibold;
+	background-color: #F0FAFF;
+	text-align: left;
+}
+
+.mandatoryStar {
+	color: black;
+	font-family: fantasy;
+}
+
+/**
+ * Error message styles
+*/
+.error-div-header {
+	height: 30px;
+	width: 690px;
+	background-image: url(../../images/validation_container_top.png);
+	background-repeat: no-repeat;
+	margin-left: 7px;
+}
+
+.error-div-body {
+	width: 690px;
+	background-image: url(../../images/validation_container_body.png);
+	background-repeat: repeat-y;
+	margin-left: 7px;
+}
+
+.error-div-footer {
+	height: 28px;
+	width: 690px;
+	background-image: url(../../images/validation_container_bottom.png);
+	background-repeat: no-repeat;
+	margin-left: 7px;
+}
+
+/**
+ * style for the search result or listing table
+*/
+#branchList,#userList,#businessRulesTable,#insuranceCompanyList,#customerDetailsList,#listOffers,#userLeaveList,#div_searchResults
+	{
+	margin: 0 0 0 5px;
+	border-left: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+
+.displayTab {
+	margin: 0 0 0 5px;
+	border: 1px solid #ccc;
+}
+
+/**
+ * HOME PAGE
+*/
+.stat-left {
+	width: 420px;
+	float: left;
+	margin: 0 0 0 10px;
+	background: url(../images/bg-home-page.png) no-repeat top right;
+}
+
+.stat-right {
+	width: 205px;
+	float: right;
+	margin: 0 10px 0 0;
+	background: url(../images/bg-home-page.png) no-repeat top right #f1f1f1;
+}
+
+.stat-left,.stat-right {
+	border: solid 1px #d1d1d1;
+	height: 200px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	padding: 10px;
+}
+
+.stat-left h3,.stat-right h3 {
+	font-size: 20px;
+	color: #426fb3;
+	text-transform: capitalize;
+	font-weight: bold;
+	text-align: left;
+	margin: 10px 0 8px 0;
+}
+
+.stat_label {
+	float: left;
+	margin: 6px 0;
+	text-align: left;
+	width: 350px;
+}
+
+.user-stat {
+	border: 0px solid #FF0000;
+	float: left;
+	height: auto;
+	margin: 125px 0 0 15px;
+	width: 500px;
+	line-height: 18px;
+}
+
+/**
+ * Login
+*/
+.login-page-wrapper {
+	width: 960px;
+	margin: 0 auto;
+	border: solid 0px #FF0000;
+}
+
+.header-login {
+	background: url("../images/logo-bima-login.png") no-repeat scroll 40px 0
+		transparent;
+	font-size: 15px;
+	height: 63px;
+	line-height: 63px;
+	margin: 40px 0 30px;
+	padding-right: 40px;
+	text-align: right;
+	width: 920px;
+}
+
+.login-content {
+	height: 377px;
+	width: 960px;
+}
+
+.login-content .left {
+	background: url(../images/bg-login-left.png) no-repeat top;
+}
+
+.login-content .right {
+	background: url(../images/bg-login-right.png) no-repeat top;
+}
+
+.login-content .left,.login-content .right {
+	width: 80px;
+	height: 377px;
+	float: left;
+}
+
+.login-content .middle {
+	width: 800px;
+	height: 377px;
+	background: url(../images/bg-login-wrapper.png) repeat-x top;
+	float: left;
+}
+
+.login-content .left,.login-content .right,.login-content .middle {
+	border: solid 0px #FF0000;
+}
+
+.login-content-middle {
+	width: 794px;
+	height: 158px;
+	background: url(../images/logo-login.png) no-repeat;
+	float: left;
+	margin: 90px 0 0;
+}
+
+/**
+ * Login field
+*/
+.login-field-wrapper {
+	float: right;
+	margin: 30px 0 0 0;
+	/*width: 280px;*/
+}
+
+.login-field-wrapper .username-field {
+	border: solid 0px #FF0000;
+	height: 35px;
+}
+
+.login-field-wrapper .password-field {
+	border: solid 0px #FF0000;
+	height: 35px;
+}
+
+.login-field-wrapper .buttons {
+	border: solid 0px #FF0000;
+	height: 35px;
+	padding-left: 82px;
+}
+
+.login-username {
+	width: 80px;
+	overflow: hidden;
+	float: left;
+	line-height: 25px;
+}
+
+.login-pswd {
+	width: auto;
+	overflow: hidden;
+	float: left;
+	line-height: 25px;
+}
+
+.login-pswd input {
+	height: 24px;
+	width: 200px;
+	line-height: 24px;
+}
+
+/* Style pertaining to User UID field only. */
+.userUid{
+	text-transform: uppercase;
+}
+
+.error-msg-login {
+	margin: 0 0 5px 0;
+}
+
+.footer-login {
+	width: 920px;
+	border-top: 1px solid #aebfcd;
+	line-height: 40px;
+	text-align: center;
+	margin: 20px auto 0;
+}
+
+#login-screen-body {
+	background: url(../images/bg-login-tz.png) repeat-x top #f5faff
+		!important;
+}
+
+.data_text img {
+	margin: -6px 0 0 0;
+}
+
+/**
+ * Button CSS
+*/
+.btn-wrapper {
+	margin: 0 0 10px 0;
+	list-style: none;
+	border: solid 0px #FF0000;
+	overflow: hidden;
+	display: inline-block;
+}
+
+.btn-wrapper li {
+	float: left;
+	background: url("../images/round-corner-left.png") no-repeat left top;
+	margin: 0;
+	padding: 0 0 0 9px;
+	border: solid 0px #FF0000;
+	cursor: pointer;
+	display: inline-block;
+}
+
+.btn-wrapper span {
+	float: left;
+	display: block;
+	background: url("../images/round-corner-right.png") no-repeat right top;
+	padding: 9px 15px 9px 6px;
+	text-decoration: none;
+	font-weight: bold;
+	color: #FFF;
+}
+
+.btn-wrapper span {
+	width: auto;
+}
+
+.btn-wrapper span {
+	float: none;
+}
+
+.btn-wrapper li:hover,.btn-wrapper li:hover span {
+	background-position: 0% -36px;
+}
+
+.btn-wrapper li:hover span {
+	background-position: 100% -36px;
+}
+
+.btn-wrapper li:active,.btn-wrapper li:active span {
+	background-position: 0% -73px;
+}
+
+.btn-wrapper li:active span {
+	background-position: 100% -73px;
+}
+
+/**
+ * Display Tag header css
+*/
+.TR_PUSH_HEADER {
+	background: #1e6994 url(../images/report-header.png) repeat-x top left;
+	height: 35px;
+	text-align: left;
+	color: #FFFFFF;
+	border-right: 1px solid #CCCCCC;
+	padding: 0 0 0 8px;
+}
+
+/**
+ * Styles for buttons - Calendar, Clear
+ */
+.calendar-icon, .clear-icon {
+	width: 20px; 
+	height: 20px; 
+	border: solid 0px #FF0000; 
+	float: left;
+	margin: 0 0 0 5px;
+	cursor: pointer;
+}
+.calendar-icon {
+	background: url(../../images/calendar-blue.png) no-repeat;
+}
+.clear-icon{
+	background: url(../../images/clear-red.png) no-repeat 0 2px;	
+}
+
+/**
+ * Styles for buttons - Add, Delete
+ */
+.add-icon, .delete-icon {
+	border: solid 0px #FF0000;
+	height: 20px;
+	width: 20px;
+	float: left;
+	background-position: -2px -4px;
+	background-repeat: no-repeat;
+	margin: 0 5px 0 0;
+	cursor: pointer;
+}
+.add-icon {
+	background-image: url(../../images/add-icon.png);
+}
+.delete-icon {
+	background-image: url(../../images/delete-icon.png);
+}
+
+/**
+ * Styles for Toggle button.
+ */
+#slick-toggle{
+	background-image: url(../../images/toggle.png);
+ 	border: solid 0px #FF0000;
+ 	height: 30px;
+ 	width: 30px;
+ 	float: left;
+	margin: 0 0 0 5px;
+	cursor: pointer;
+}
+
+/**
+ * Styles for Search button.
+ */
+#search-icon{
+	background-image: url(../../images/search.png);
+ 	border: solid 0px #FF0000;
+ 	height: 20px;
+ 	width: 20px;
+ 	float: left;
+	margin: 0 0 0 10px;
+	cursor: pointer;
+}

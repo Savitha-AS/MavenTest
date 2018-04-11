@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE mapping PUBLIC "-//EXOLAB/Castor Mapping DTD Version 1.0//EN" "http://castor.org/mapping.dtd">
+<mapping>
+	<class name="com.mip.framework.castor.SMSPlaceHolders">
+		<map-to xml="sms-place-holders" />
+		<field name="placeHolderMap" collection="map">
+			<bind-xml name="placeHolder">
+				<class name="org.exolab.castor.mapping.MapItem">
+					<field name="key" type="java.lang.String">
+						<bind-xml name="display-order" node="attribute" />
+					</field>
+					<field name="value" type="com.mip.application.view.SMSPlaceHolderVO">
+						<bind-xml name="holder" />
+					</field>
+				</class>
+			</bind-xml>
+		</field>
+	</class>
+	
+	<class name="com.mip.application.view.SMSPlaceHolderVO">
+		<map-to xml="holder" />
+		<field name="placeHolderCode" type="string">
+			<bind-xml name="code" node="element" />
+		</field>
+		<field name="placeHolderName" type="string">
+			<bind-xml name="name" node="element" />
+		</field>
+		<field name="placeHolderValue" type="string">
+			<bind-xml name="value" node="element" />
+		</field>
+	</class>
+	
+	<!--  
+    <class name="com.mip.application.view.AdminConfigVO">
+        <map-to xml="admin-config" />
+        <field name="defaultPwd" type="string">
+            <bind-xml name="defaultPwd" node="element"/>
+        </field>
+        <field name="userLoginPrefix" type="string">
+            <bind-xml name="userLoginPrefix" node="element"/>
+        </field>
+        <field name="pwdHistoryLimit" type="int">
+            <bind-xml name="pwdHistoryLimit" node="element"/>
+        </field>
+        <field name="maxLoginAttempts" type="int">
+            <bind-xml name="maxLoginAttempts" node="element"/>
+        </field>
+        <field name="registerCustomerWSURL" type="string">
+            <bind-xml name="registerCustomerWSURL" node="element"/>
+        </field>
+    </class>
+    -->
+</mapping>

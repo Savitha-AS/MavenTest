@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.mip.application.model.CustomerDetails" table="customer_details">
+		<id name="custId" type="int">
+			<column name="cust_id" />
+			<generator class="identity" />
+		</id>
+		<property name="fname" type="string">
+			<column name="fname" length="100" not-null="true" />
+		</property>
+		<property name="sname" type="string">
+			<column name="sname" length="50" not-null="true" />
+		</property>
+		<property name="age" type="int">
+			<column name="age" not-null="true" />
+		</property>
+		<property name="impliedAge" type="int">
+			<column name="implied_age" />
+		</property>
+		<property name="dob" type="date">
+			<column name="dob" length="10" />
+		</property>
+		<property name="gender" type="string">
+			<column name="gender" length="6" />
+		</property>
+		<property name="msisdn" type="string">
+			<column name="msisdn" length="12" not-null="true" />
+		</property>
+		<many-to-one name="modifiedBy" class="com.mip.application.model.UserDetails" lazy="false">
+			<column name="modified_by" not-null="true" />
+		</many-to-one>		
+		<property name="modifiedDate" type="timestamp">
+			<column name="modified_date" length="19" not-null="true" />
+		</property>
+		
+		<property name="deductionMode" type="int">
+			<column name="deduction_type" />
+		</property>
+		<set name="insuredRelatives" table="insured_relative_details" cascade="all" lazy="false">              
+           <key column="cust_id" not-null="true"></key>           
+           <one-to-many class="com.mip.application.model.InsuredRelativeDetails"  />
+        </set>
+	</class>
+</hibernate-mapping>

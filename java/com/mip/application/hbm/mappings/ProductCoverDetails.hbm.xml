@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.mip.application.model.ProductCoverDetails" table="offer_cover_details">
+		<id name="productLevelId" type="int">
+			<column name="product_level_id" />
+			<generator class="identity" />
+		</id>
+		<many-to-one name="productDetails" class="com.mip.application.model.ProductDetails">
+			<column name="product_id" />
+		</many-to-one>
+		<property name="productCover" type="float">
+			<column name="product_cover" precision="12" scale="0" not-null="true" />
+		</property>
+		<property name="coverCharges" type="float">
+			<column name="cover_charges" precision="12" scale="0"
+				not-null="true" />
+		</property>
+	</class>
+</hibernate-mapping>
