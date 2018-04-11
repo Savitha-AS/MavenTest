@@ -178,7 +178,7 @@ public class AdminConfigManager {
 				queryString.append(" SET data_val = ? ");
 				queryParams = new Object[] { "" + value, name };
 			}
-			queryString.append(" WHERE param = ? ");
+			queryString.append(" WHERE param = ? ") ;
 
 			logger.debug("", queryString) ;
 
