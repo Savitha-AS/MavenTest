@@ -180,7 +180,7 @@ public class AdminConfigManager {
 			}
 			queryString.append(" WHERE param = ? ");
 
-			logger.debug("", queryString);
+			logger.debug("", queryString) ;
 
 			noOfRowsAffected = jdbcTemplate.update(queryString.toString(),
 					queryParams);
